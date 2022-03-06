@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/BalliAsghar/TempMail#readme",
   "dependencies": {
+    "axios": "^0.26.0",
+    "clipboardy": "^3.0.0",
     "commander": "^9.0.0"
   }
 }

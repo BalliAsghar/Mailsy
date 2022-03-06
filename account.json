@@ -1,0 +1,13 @@
+{
+  "@context": "/contexts/Account",
+  "@id": "/accounts/6225342a85f58640ce1736f9",
+  "@type": "Account",
+  "id": "6225342a85f58640ce1736f9",
+  "address": "42dko5@midiharmonica.com",
+  "quota": 40000000,
+  "used": 0,
+  "isDisabled": false,
+  "isDeleted": false,
+  "createdAt": "2022-03-06T22:22:34+00:00",
+  "updatedAt": "2022-03-06T22:22:34+00:00"
+}
