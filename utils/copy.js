@@ -1,25 +1,26 @@
 const child_process = require("child_process");
+
 exports.copy = (data) => {
   return new Promise((resolve, reject) => {
     // check which platform is running
-    if (process.platform === "win32") {
+    const platform = process.platform;
+
+    // if the platform is win32 or darwin then run the code
+    if (platform === "win32" || platform === "darwin") {
       // create a new child process
-      const child = child_process.spawn("clip");
+      const child = child_process.spawn(
+        platform === "win32" ? "clip" : "pbcopy"
+      );
       // write the data to the child process
       child.stdin.write(data);
       // close the child process
       child.stdin.end();
-    } else if (process.platform === "darwin") {
-      // create a new child process
-      const child = child_process.spawn("pbcopy");
-      // write the data to the child process
-      child.stdin.write(data);
-      // close the child process
-      child.stdin.end();
-    } else {
-      reject(new Error("Platform not supported"));
     }
+
     // resolve the promise
     resolve();
+
+    // reject the promise
+    reject(new Error("Platform not supported"));
   });
 };
