@@ -6,25 +6,25 @@ const program = new Command();
 
 // Generate a new email
 program
-  .command("generate")
+  .command("g")
   .description("Generate a new email")
   .action(() => utils.createAccount());
 
 // fetch messages from the inbox
 program
-  .command("messages")
+  .command("m")
   .description("Fetch messages from the inbox")
   .action(() => utils.fetchMessages());
 
 // delete account
 program
-  .command("delete")
+  .command("d")
   .description("Delete account")
   .action(() => utils.deleteAccount());
 
 // show details of the account
 program
-  .command("details")
+  .command("me")
   .description("Show details of the account")
   .action(() => utils.showDetails());
 
