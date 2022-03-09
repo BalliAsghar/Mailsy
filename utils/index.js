@@ -50,6 +50,12 @@ exports.fetchMessages = async () => {
   // read the account data from file
   const account = JSON.parse(await fs.readFile("./account.json"));
 
+  // if the account is {}, then the account has not been created yet
+  if (Object.keys(account).length === 0) {
+    console.log("Account not created yet");
+    return;
+  }
+
   // get the messages
   const { data } = await axios.get("https://api.mail.tm/messages", {
     headers: {
@@ -58,12 +64,6 @@ exports.fetchMessages = async () => {
   });
   // get the emails
   const emails = data["hydra:member"];
-
-  // if there are no emails, exit
-  if (!emails.length) {
-    console.log("No emails");
-    return;
-  }
 
   // display the from and subject of the emails
   emails.forEach((email) => {
@@ -76,6 +76,12 @@ exports.deleteAccount = async () => {
   try {
     const account = JSON.parse(await fs.readFile("./account.json"));
 
+    // if the account is {}, then the account has not been created yet
+    if (Object.keys(account).length === 0) {
+      console.log("No Account exits to delete");
+      return;
+    }
+
     await axios.delete(`https://api.mail.tm/accounts/${account.id}`, {
       headers: {
         Authorization: `Bearer ${account.token.token}`,
@@ -83,7 +89,7 @@ exports.deleteAccount = async () => {
     });
 
     // empty the account.json file
-    await fs.writeFile("./account.json", "");
+    await fs.writeFile("./account.json", "{}");
 
     console.log("Account deleted");
   } catch (error) {
