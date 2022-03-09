@@ -10,7 +10,7 @@
   "node": "^12.20.0 || ^14.13.1 || >=16.0.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BalliAsghar/TempMail.git"
+    "url": "git+https://github.com/BalliAsghar/Mailsy.git"
   },
   "bin": {
     "mailsy": "./index.js"
@@ -19,9 +19,9 @@
   "author": "BalliAsghar",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/BalliAsghar/TempMail/issues"
+    "url": "https://github.com/BalliAsghar/Mailsy/issues"
   },
-  "homepage": "https://github.com/BalliAsghar/TempMail#readme",
+  "homepage": "https://github.com/BalliAsghar/Mailsy#readme",
   "dependencies": {
     "axios": "^0.26.0",
     "commander": "^9.0.0"
