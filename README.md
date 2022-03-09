@@ -1,6 +1,6 @@
 # Mailsy
 
-Quickly generate a temporary email address
+Quickly generate disposable a email address
 
 ## ScreenShot
 
