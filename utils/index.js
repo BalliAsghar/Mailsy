@@ -3,6 +3,14 @@ const fs = require("fs/promises");
 const { copy } = require("./copy");
 
 exports.createAccount = async () => {
+  const account = JSON.parse(await fs.readFile("./account.json"));
+
+  // if account is exists, throw an error
+  if (Object.keys(account).length !== 0) {
+    console.log("Account already exists");
+    return;
+  }
+
   // get the available email domains
   const { data } = await axios.get("https://api.mail.tm/domains?page=1");
 
