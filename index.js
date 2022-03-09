@@ -1,35 +1,31 @@
 #!/usr/bin/env node
-const { Command } = require("commander");
-const {
-  createAccount,
-  fetchMessages,
-  deleteAccount,
-  showDetails,
-} = require("./utils");
+import { Command } from "commander";
+import utils from "./utils/index.js";
+
 const program = new Command();
 
 // Generate a new email
 program
   .command("generate")
   .description("Generate a new email")
-  .action(() => createAccount());
+  .action(() => utils.createAccount());
 
 // fetch messages from the inbox
 program
   .command("messages")
   .description("Fetch messages from the inbox")
-  .action(() => fetchMessages());
+  .action(() => utils.fetchMessages());
 
 // delete account
 program
   .command("delete")
   .description("Delete account")
-  .action(() => deleteAccount());
+  .action(() => utils.deleteAccount());
 
 // show details of the account
 program
   .command("details")
   .description("Show details of the account")
-  .action(() => showDetails());
+  .action(() => utils.showDetails());
 
 program.parse();

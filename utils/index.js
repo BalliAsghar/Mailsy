@@ -1,8 +1,8 @@
-const axios = require("axios");
-const fs = require("fs/promises");
-const { copy } = require("./copy");
+import axios from "axios";
+import fs from "fs/promises";
+import copy from "./copy.js";
 
-exports.createAccount = async () => {
+const createAccount = async () => {
   // get the available email domains
   const { data } = await axios.get("https://api.mail.tm/domains?page=1");
 
@@ -45,7 +45,7 @@ exports.createAccount = async () => {
   }
 };
 
-exports.fetchMessages = async () => {
+const fetchMessages = async () => {
   // read the account data from file
   const account = JSON.parse(await fs.readFile("./account.json"));
 
@@ -77,7 +77,7 @@ exports.fetchMessages = async () => {
   });
 };
 
-exports.deleteAccount = async () => {
+const deleteAccount = async () => {
   try {
     const account = JSON.parse(await fs.readFile("./account.json"));
 
@@ -102,7 +102,7 @@ exports.deleteAccount = async () => {
   }
 };
 
-exports.showDetails = async () => {
+const showDetails = async () => {
   // read the account data from file
   const account = JSON.parse(await fs.readFile("./account.json"));
 
@@ -128,3 +128,13 @@ exports.showDetails = async () => {
     createdAt: ${new Date(data.createdAt).toLocaleString()}
   `);
 };
+
+// export the functions using es6 syntax
+const utils = {
+  createAccount,
+  fetchMessages,
+  deleteAccount,
+  showDetails,
+};
+
+export default utils;

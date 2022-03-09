@@ -1,6 +1,6 @@
-const child_process = require("child_process");
+import child_process from "child_process";
 
-exports.copy = (data) => {
+const copy = (data) => {
   return new Promise((resolve, reject) => {
     // check which platform is running
     const platform = process.platform;
@@ -24,3 +24,5 @@ exports.copy = (data) => {
     reject(new Error("Platform not supported"));
   });
 };
+
+export default copy;
