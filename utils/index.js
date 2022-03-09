@@ -71,3 +71,19 @@ exports.fetchMessages = async () => {
     console.log(`Subject: ${email.subject}`);
   });
 };
+
+exports.deleteAccount = async () => {
+  try {
+    const account = JSON.parse(await fs.readFile("./account.json"));
+
+    await axios.delete(`https://api.mail.tm/accounts/${account.id}`, {
+      headers: {
+        Authorization: `Bearer ${account.token.token}`,
+      },
+    });
+
+    console.log("Account deleted");
+  } catch (error) {
+    console.error(error.message);
+  }
+};
