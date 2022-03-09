@@ -1,7 +1,7 @@
 {
-  "name": "tempmail",
+  "name": "mailsy",
   "version": "1.0.0",
-  "description": "",
+  "description": "quickly generate a temporary email address",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/BalliAsghar/TempMail.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "BalliAsghar",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/BalliAsghar/TempMail/issues"
@@ -19,8 +19,6 @@
   "homepage": "https://github.com/BalliAsghar/TempMail#readme",
   "dependencies": {
     "axios": "^0.26.0",
-    "clipboardy": "^3.0.0",
-    "commander": "^9.0.0",
-    "open": "^8.4.0"
+    "commander": "^9.0.0"
   }
 }
