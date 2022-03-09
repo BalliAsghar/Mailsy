@@ -3,21 +3,12 @@ const fs = require("fs/promises");
 const { copy } = require("./copy");
 
 exports.createAccount = async () => {
-  const account = JSON.parse(await fs.readFile("./account.json"));
-
-  // if account is exists, throw an error
-  if (Object.keys(account).length !== 0) {
-    console.log("Account already exists");
-    return;
-  }
-
   // get the available email domains
   const { data } = await axios.get("https://api.mail.tm/domains?page=1");
 
   // get the first domain
   const domain = data["hydra:member"][0].domain;
 
-  console.log(domain);
   // generate a random email address
   const email = `${Math.random().toString(36).substring(7)}@${domain}`;
 
@@ -73,6 +64,9 @@ exports.fetchMessages = async () => {
   // get the emails
   const emails = data["hydra:member"];
 
+  // if there are no emails, then there are no messages
+  emails.length === 0 ? console.log("No Emails") : null;
+
   // display the from and subject of the emails
   emails.forEach((email) => {
     console.log(`From: ${email.from.name} (${email.from.address})`);
@@ -103,4 +97,31 @@ exports.deleteAccount = async () => {
   } catch (error) {
     console.error(error.message);
   }
+};
+
+exports.showDetails = async () => {
+  // read the account data from file
+  const account = JSON.parse(await fs.readFile("./account.json"));
+
+  // if the account is {}, then the account has not been created yet
+  if (Object.keys(account).length === 0) {
+    console.log("No Account exits to show details");
+    return;
+  }
+
+  // get the account details
+  const { data } = await axios.get(
+    `https://api.mail.tm/accounts/${account.id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${account.token.token}`,
+      },
+    }
+  );
+
+  // display the account details
+  console.log(`
+    Email: ${data.address}
+    createdAt: ${new Date(data.createdAt).toLocaleString()}
+  `);
 };
