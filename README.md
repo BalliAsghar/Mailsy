@@ -1,10 +1,10 @@
 # Mailsy
 
-Quickly generate disposable a email address
+Quickly generate a disposable email address
 
 ## ScreenShot
 
-![alt text](https://raw.githubusercontent.com/BalliAsghar/TempMail/main/screenshot/Mailsy.png?token=GHSAT0AAAAAABRCT4A2PGY4MEMETXJYY5QIYRJBDIQ)
+![alt text](https://raw.githubusercontent.com/BalliAsghar/Mailsy/main/screenshot/Mailsy.png?token=GHSAT0AAAAAABRCT4A2I6LGCVJYIAZDFZTCYRJBLIA)
 
 ## Installation
 
