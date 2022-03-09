@@ -69,8 +69,11 @@ exports.fetchMessages = async () => {
 
   // display the from and subject of the emails
   emails.forEach((email) => {
-    console.log(`From: ${email.from.name} (${email.from.address})`);
-    console.log(`Subject: ${email.subject}`);
+    console.log(`
+    From: ${email.from.name} (${email.from.address})
+    Subject: ${email.subject}
+    message: ${email.intro}
+    `);
   });
 };
 

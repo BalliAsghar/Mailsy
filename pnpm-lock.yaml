@@ -4,11 +4,13 @@ specifiers:
   axios: ^0.26.0
   clipboardy: ^3.0.0
   commander: ^9.0.0
+  open: ^8.4.0
 
 dependencies:
   axios: 0.26.0
   clipboardy: 3.0.0
   commander: 9.0.0
+  open: 8.4.0
 
 packages:
 
@@ -45,6 +47,11 @@ packages:
       path-key: 3.1.1
       shebang-command: 2.0.0
       which: 2.0.2
+    dev: false
+
+  /define-lazy-prop/2.0.0:
+    resolution: {integrity: sha512-Ds09qNh8yw3khSjiJjiUInaGX9xlqZDY7JVryGxdxV7NPeuqQfplOpQ66yJFZut3jLa5zOwkXw1g9EI2uKh4Og==}
+    engines: {node: '>=8'}
     dev: false
 
   /execa/5.1.1:
@@ -125,6 +132,15 @@ packages:
     engines: {node: '>=6'}
     dependencies:
       mimic-fn: 2.1.0
+    dev: false
+
+  /open/8.4.0:
+    resolution: {integrity: sha512-XgFPPM+B28FtCCgSb9I+s9szOC1vZRSwgWsRUA5ylIxRTgKozqjOCrVOqGsYABPYK5qnfqClxZTFBa8PKt2v6Q==}
+    engines: {node: '>=12'}
+    dependencies:
+      define-lazy-prop: 2.0.0
+      is-docker: 2.2.1
+      is-wsl: 2.2.0
     dev: false
 
   /path-key/3.1.1:
