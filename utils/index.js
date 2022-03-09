@@ -82,6 +82,9 @@ exports.deleteAccount = async () => {
       },
     });
 
+    // empty the account.json file
+    await fs.writeFile("./account.json", "");
+
     console.log("Account deleted");
   } catch (error) {
     console.error(error.message);
