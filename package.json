@@ -12,6 +12,9 @@
     "type": "git",
     "url": "git+https://github.com/BalliAsghar/TempMail.git"
   },
+  "bin": {
+    "mailsy": "./index.js"
+  },
   "keywords": [],
   "author": "BalliAsghar",
   "license": "ISC",
