@@ -24,6 +24,7 @@
   "homepage": "https://github.com/BalliAsghar/Mailsy#readme",
   "dependencies": {
     "axios": "^0.26.0",
-    "commander": "^9.0.0"
+    "commander": "^9.0.0",
+    "lowdb": "^3.0.0"
   }
 }

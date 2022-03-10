@@ -3,10 +3,12 @@ lockfileVersion: 5.3
 specifiers:
   axios: ^0.26.0
   commander: ^9.0.0
+  lowdb: ^3.0.0
 
 dependencies:
   axios: 0.26.0
   commander: 9.0.0
+  lowdb: 3.0.0
 
 packages:
 
@@ -31,4 +33,16 @@ packages:
     peerDependenciesMeta:
       debug:
         optional: true
+    dev: false
+
+  /lowdb/3.0.0:
+    resolution: {integrity: sha512-9KZRulmIcU8fZuWiaM0d5e2/nPnrFyXkeXVpqT+MJS+vgbgOf1EbtvgQmba8HwUFgDl1oeZR6XqEJnkJmQdKmg==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+    dependencies:
+      steno: 2.1.0
+    dev: false
+
+  /steno/2.1.0:
+    resolution: {integrity: sha512-mauOsiaqTNGFkWqIfwcm3y/fq+qKKaIWf1vf3ocOuTdco9XoHCO2AGF1gFYXuZFSWuP38Q8LBHBGJv2KnJSXyA==}
+    engines: {node: ^14.13.1 || >=16.0.0}
     dev: false
