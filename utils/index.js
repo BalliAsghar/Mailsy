@@ -1,8 +1,24 @@
 import axios from "axios";
 import fs from "fs/promises";
 import copy from "./copy.js";
+import { Low, JSONFile } from "lowdb";
+
+const adapter = new JSONFile("account.json");
+const db = new Low(adapter);
 
 const createAccount = async () => {
+  // read the account data from file
+  await db.read();
+
+  // if account already exists, then show message and return
+  if (db.data !== null) {
+    console.log("Account already exists");
+    return;
+  }
+
+  // set the default values
+  db.data ||= { account: {} };
+
   // get the available email domains
   const { data } = await axios.get("https://api.mail.tm/domains?page=1");
 
@@ -36,8 +52,10 @@ const createAccount = async () => {
     // write token to a data object
     data.token = token;
 
-    // write the data to file using the fs module
-    await fs.writeFile("./account.json", JSON.stringify(data, null, 2));
+    //write the data object to the account.json file
+    db.data.account = data;
+
+    await db.write();
 
     console.log(`Account created: ${email}`);
   } catch (error) {

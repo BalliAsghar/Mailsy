@@ -1,1 +1,20 @@
-{}
+{
+  "account": {
+    "@context": "/contexts/Account",
+    "@id": "/accounts/622a928ad0fb9766a6419627",
+    "@type": "Account",
+    "id": "622a928ad0fb9766a6419627",
+    "address": "8tfk79@cutradition.com",
+    "quota": 40000000,
+    "used": 0,
+    "isDisabled": false,
+    "isDeleted": false,
+    "createdAt": "2022-03-11T00:06:34+00:00",
+    "updatedAt": "2022-03-11T00:06:34+00:00",
+    "password": "726srs",
+    "token": {
+      "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NDY5NTcxOTQsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6Ijh0Zms3OUBjdXRyYWRpdGlvbi5jb20iLCJpZCI6IjYyMmE5MjhhZDBmYjk3NjZhNjQxOTYyNyIsIm1lcmN1cmUiOnsic3Vic2NyaWJlIjpbIi9hY2NvdW50cy82MjJhOTI4YWQwZmI5NzY2YTY0MTk2MjciXX19.9MeFaeZAtaRktfOKtUb3PtUrtfyYNTe42j1M3OfF2hfk2PAhiTBzkvE7ci6ZHtqmUdttXFUQhY8VNC34CAsbLA",
+      "id": "622a928ad0fb9766a6419627"
+    }
+  }
+}
