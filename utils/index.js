@@ -16,9 +16,6 @@ const createAccount = async () => {
     return;
   }
 
-  // set the default values
-  db.data ||= { account: {} };
-
   // get the available email domains
   const { data } = await axios.get("https://api.mail.tm/domains?page=1");
 
@@ -53,7 +50,7 @@ const createAccount = async () => {
     data.token = token;
 
     //write the data object to the account.json file
-    db.data.account = data;
+    db.data = data;
 
     await db.write();
 
@@ -64,12 +61,12 @@ const createAccount = async () => {
 };
 
 const fetchMessages = async () => {
-  // read the account data from file
-  const account = JSON.parse(await fs.readFile("./account.json"));
+  await db.read();
 
-  // if the account is {}, then the account has not been created yet
-  if (Object.keys(account).length === 0) {
-    console.log("Account not created yet");
+  const account = db.data;
+
+  if (account === null) {
+    console.log("Account does not exist");
     return;
   }
 
@@ -96,12 +93,14 @@ const fetchMessages = async () => {
 };
 
 const deleteAccount = async () => {
-  try {
-    const account = JSON.parse(await fs.readFile("./account.json"));
+  await db.read();
 
-    // if the account is {}, then the account has not been created yet
-    if (Object.keys(account).length === 0) {
-      console.log("No Account exits to delete");
+  const account = db.data;
+
+  try {
+    // if the account is null, then the account has not been created yet
+    if (account === null) {
+      console.log("Account not created yet");
       return;
     }
 
@@ -111,8 +110,8 @@ const deleteAccount = async () => {
       },
     });
 
-    // empty the account.json file
-    await fs.writeFile("./account.json", "{}");
+    // delete the account.json file
+    await fs.unlink("./account.json");
 
     console.log("Account deleted");
   } catch (error) {
@@ -121,12 +120,13 @@ const deleteAccount = async () => {
 };
 
 const showDetails = async () => {
-  // read the account data from file
-  const account = JSON.parse(await fs.readFile("./account.json"));
+  await db.read();
 
-  // if the account is {}, then the account has not been created yet
-  if (Object.keys(account).length === 0) {
-    console.log("No Account exits to show details");
+  const account = db.data;
+
+  // if the account is null then the account has not been created yet
+  if (account === null) {
+    console.log("Account not created yet");
     return;
   }
 
