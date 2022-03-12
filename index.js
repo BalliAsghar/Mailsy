@@ -22,6 +22,13 @@ program
   .description("Delete account")
   .action(() => utils.deleteAccount());
 
+// open specific email
+program
+  .command("o")
+  .argument("<email>", "Email to open, e.g. '1'")
+  .description("Open specific email")
+  .action((email) => utils.openEmail(email));
+
 // show details of the account
 program
   .command("me")

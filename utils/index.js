@@ -2,6 +2,7 @@ import axios from "axios";
 import fs from "fs/promises";
 import copy from "./copy.js";
 import { Low, JSONFile } from "lowdb";
+import open from "open";
 
 const adapter = new JSONFile("account.json");
 const db = new Low(adapter);
@@ -90,6 +91,7 @@ const fetchMessages = async () => {
     message: ${email.intro}
     `);
   });
+  return emails;
 };
 
 const deleteAccount = async () => {
@@ -147,12 +149,48 @@ const showDetails = async () => {
   `);
 };
 
+// open specific email
+const openEmail = async (email) => {
+  try {
+    await db.read();
+
+    const account = db.data;
+
+    const mails = await fetchMessages();
+
+    const mailToOpen = mails[email - 1];
+
+    // get email html content
+    const { data } = await axios.get(
+      `https://api.mail.tm/messages/${mailToOpen.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${account.token.token}`,
+        },
+      }
+    );
+
+    // write the email html content to a file
+    await fs.writeFile("./email.html", data.html[0]);
+
+    // open the email html file in the browser
+    await open("./email.html");
+
+    console.log("Email opened");
+
+    // delete the email html file
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
 // export the functions using es6 syntax
 const utils = {
   createAccount,
   fetchMessages,
   deleteAccount,
   showDetails,
+  openEmail,
 };
 
 export default utils;
