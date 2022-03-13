@@ -3,17 +3,28 @@ import fs from "fs/promises";
 import copy from "./copy.js";
 import { Low, JSONFile } from "lowdb";
 import open from "open";
+import ora from "ora";
+import chalk from "chalk";
 
 const adapter = new JSONFile("account.json");
+
 const db = new Low(adapter);
 
 const createAccount = async () => {
+  // start the spinner
+  const spinner = ora("creating...").start();
+
   // read the account data from file
   await db.read();
 
   // if account already exists, then show message and return
   if (db.data !== null) {
-    console.log("Account already exists");
+    spinner.stop();
+    console.log(
+      `${chalk.redBright("Account already exists")}: ${chalk.underline.yellow(
+        "delete account to create a new one"
+      )}`
+    );
     return;
   }
 
@@ -55,19 +66,33 @@ const createAccount = async () => {
 
     await db.write();
 
-    console.log(`Account created: ${email}`);
+    // stop the spinner
+    spinner.stop();
+
+    console.log(
+      `${chalk.blue("Account created")}: ${chalk.underline.green(email)}`
+    );
   } catch (error) {
-    console.error(error.message);
+    // stop the spinner
+    spinner.stop();
+    console.error(`${chalk.redBright("Error")}: ${error.message}`);
   }
 };
 
 const fetchMessages = async () => {
+  // start the spinner
+  const spinner = ora("fetching...").start();
+
   await db.read();
 
   const account = db.data;
 
   if (account === null) {
-    console.log("Account does not exist");
+    // stop the spinner
+    spinner.stop();
+
+    console.log(`${chalk.redBright("Account not created yet")}`);
+
     return;
   }
 
@@ -80,13 +105,22 @@ const fetchMessages = async () => {
   // get the emails
   const emails = data["hydra:member"];
 
-  // if there are no emails, then there are no messages
-  emails.length === 0 ? console.log("No Emails") : null;
+  // stop the spinner
+  spinner.stop();
 
-  return emails;
+  // if there are no emails, then there are no messages
+  if (emails.length === 0) {
+    console.log(`${chalk.redBright("No Emails")}`);
+    return null;
+  } else {
+    return emails;
+  }
 };
 
 const deleteAccount = async () => {
+  // start the spinner
+  const spinner = ora("deleting...").start();
+
   await db.read();
 
   const account = db.data;
@@ -94,7 +128,10 @@ const deleteAccount = async () => {
   try {
     // if the account is null, then the account has not been created yet
     if (account === null) {
-      console.log("Account not created yet");
+      // stop the spinner
+      spinner.stop();
+
+      console.log(`${chalk.redBright("Account not created yet")}`);
       return;
     }
 
@@ -107,20 +144,29 @@ const deleteAccount = async () => {
     // delete the account.json file
     await fs.unlink("./account.json");
 
-    console.log("Account deleted");
+    // stop the spinner
+    spinner.stop();
+
+    console.log(`${chalk.blue("Account deleted")}`);
   } catch (error) {
     console.error(error.message);
   }
 };
 
 const showDetails = async () => {
+  // start the spinner
+  const spinner = ora("fetching details...").start();
+
   await db.read();
 
   const account = db.data;
 
   // if the account is null then the account has not been created yet
   if (account === null) {
-    console.log("Account not created yet");
+    // stop the spinner
+    spinner.stop();
+
+    console.log(`${chalk.redBright("Account not created yet")}`);
     return;
   }
 
@@ -134,16 +180,22 @@ const showDetails = async () => {
     }
   );
 
+  // stop the spinner
+  spinner.stop();
+
   // display the account details
   console.log(`
-    Email: ${data.address}
-    createdAt: ${new Date(data.createdAt).toLocaleString()}
+    Email: ${chalk.underline.green(data.address)}
+    createdAt: ${chalk.green(new Date(data.createdAt).toLocaleString())}
   `);
 };
 
 // open specific email
 const openEmail = async (email) => {
   try {
+    // start the spinner
+    const spinner = ora("opening...").start();
+
     await db.read();
 
     const account = db.data;
@@ -167,8 +219,13 @@ const openEmail = async (email) => {
 
     // open the email html file in the browser
     await open("./email.html");
+
+    // stop the spinner
+    spinner.stop();
   } catch (error) {
-    console.error(error.message);
+    // stop the spinner
+    spinner.stop();
+    console.error(`${chalk.redBright("Error")}: ${error.message}`);
   }
 };
 

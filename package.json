@@ -1,6 +1,6 @@
 {
   "name": "mailsy",
-  "version": "1.5.1",
+  "version": "2.0.0",
   "description": "quickly generate a temporary email address",
   "exports": "./index.js",
   "type": "module",
@@ -15,7 +15,11 @@
   "bin": {
     "mailsy": "./index.js"
   },
-  "keywords": [],
+  "keywords": [
+    "email",
+    "generate",
+    "temporary"
+  ],
   "author": "BalliAsghar",
   "license": "MIT",
   "bugs": {
@@ -24,8 +28,11 @@
   "homepage": "https://github.com/BalliAsghar/Mailsy#readme",
   "dependencies": {
     "axios": "^0.26.0",
+    "chalk": "^5.0.1",
     "commander": "^9.0.0",
+    "inquirer": "^8.2.1",
     "lowdb": "^3.0.0",
-    "open": "^8.4.0"
+    "open": "^8.4.0",
+    "ora": "^6.1.0"
   }
 }

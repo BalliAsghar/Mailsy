@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import { Command } from "commander";
 import utils from "./utils/index.js";
+import inquirer from "inquirer";
+import chalk from "chalk";
 
 const program = new Command();
 
@@ -18,14 +20,25 @@ program
     try {
       const emails = await utils.fetchMessages();
 
-      emails.forEach((email, i) => {
-        console.log(`
-        ID: ${i + 1}
-        From: ${email.from.name} (${email.from.address})
-        Subject: ${email.subject}
-        message: ${email.intro}
-        `);
-      });
+      if (!emails) return;
+
+      // show the emails using inquirer
+      const { email } = await inquirer.prompt([
+        {
+          type: "list",
+          name: "email",
+          message: "Select an email",
+          choices: emails.map((email, index) => ({
+            name: `${index + 1}. ${chalk.underline.blue(
+              email.subject
+            )} - from ${email.from.address}`,
+            value: index + 1,
+          })),
+        },
+      ]);
+
+      // open the email
+      await utils.openEmail(email);
     } catch (error) {
       console.error(error.message);
     }
