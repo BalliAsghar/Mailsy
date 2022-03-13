@@ -2,6 +2,7 @@ lockfileVersion: 5.3
 
 specifiers:
   axios: ^0.26.0
+  chalk: ^5.0.1
   commander: ^9.0.0
   inquirer: ^8.2.1
   lowdb: ^3.0.0
@@ -9,6 +10,7 @@ specifiers:
 
 dependencies:
   axios: 0.26.0
+  chalk: 5.0.1
   commander: 9.0.0
   inquirer: 8.2.1
   lowdb: 3.0.0
@@ -68,6 +70,11 @@ packages:
     dependencies:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
+    dev: false
+
+  /chalk/5.0.1:
+    resolution: {integrity: sha512-Fo07WOYGqMfCWHOzSXOt2CxDbC6skS/jO9ynEcmpANMoPrD+W1r1K6Vx7iNm+AQmETU1Xr2t+n8nzkV9t6xh3w==}
+    engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
     dev: false
 
   /chardet/0.7.0:
