@@ -80,12 +80,19 @@ const createAccount = async () => {
 };
 
 const fetchMessages = async () => {
+  // start the spinner
+  const spinner = ora("fetching...").start();
+
   await db.read();
 
   const account = db.data;
 
   if (account === null) {
-    console.log("Account does not exist");
+    // stop the spinner
+    spinner.stop();
+
+    console.log(`${chalk.redBright("Account not created yet")}`);
+
     return;
   }
 
@@ -98,8 +105,13 @@ const fetchMessages = async () => {
   // get the emails
   const emails = data["hydra:member"];
 
+  // stop the spinner
+  spinner.stop();
+
   // if there are no emails, then there are no messages
-  emails.length === 0 ? console.log("No Emails") : null;
+  emails.length === 0
+    ? console.log(`${chalk.underline.redBright("No Emails")}`)
+    : null;
 
   return emails;
 };
