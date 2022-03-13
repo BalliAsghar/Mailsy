@@ -27,22 +27,25 @@ random@email.com
 
 **Fetching Emails**
 
+**Note**
+
+#### output structure
+
+- ID - Subject - From
+
 ```console
-    foo@bar:~$ mailsy m
-
-    ID: 1
-    From: Balli (m.asghar99@outlook.com)
-    Subject: Hello
-    message: Hello, World!
-
-    ID: 2
-    From: Balli (m.asghar99@outlook.com)
-    Subject: Mailsy
-    message: Quickly generate a disposable email.
+foo@bar:~$ mailsy m
+? Select an email (Use arrow keys)
+❯ 1. Hello, World! - from m.asghar99@outlook.com
+  2. Mailsy - from m.asghar99@outlook.com
 
 ```
 
 **Open email in browser**
+
+**Note**
+
+- this feature will be removed in the future.
 
 if you want see the full email use "o" command with ID if the email e.g 2
 
@@ -64,6 +67,9 @@ Account deleted
 
 ```console
 foo@bar:~$ mailsy me
+
+ Email: random@random.com
+ createdAt: 13/03/2022, 21:32:09
 
 ```
 
