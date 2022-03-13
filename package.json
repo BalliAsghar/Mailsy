@@ -1,6 +1,6 @@
 {
   "name": "mailsy",
-  "version": "1.5.1",
+  "version": "2.0.0",
   "description": "quickly generate a temporary email address",
   "exports": "./index.js",
   "type": "module",
@@ -15,7 +15,11 @@
   "bin": {
     "mailsy": "./index.js"
   },
-  "keywords": [],
+  "keywords": [
+    "email",
+    "generate",
+    "temporary"
+  ],
   "author": "BalliAsghar",
   "license": "MIT",
   "bugs": {
