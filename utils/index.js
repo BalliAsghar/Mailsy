@@ -4,21 +4,27 @@ import copy from "./copy.js";
 import { Low, JSONFile } from "lowdb";
 import open from "open";
 import ora from "ora";
+import chalk from "chalk";
 
 const adapter = new JSONFile("account.json");
-
-// start the spinner
-const spinner = ora("creating...").start();
 
 const db = new Low(adapter);
 
 const createAccount = async () => {
+  // start the spinner
+  const spinner = ora("creating...").start();
+
   // read the account data from file
   await db.read();
 
   // if account already exists, then show message and return
   if (db.data !== null) {
-    console.log("Account already exists");
+    spinner.stop();
+    console.log(
+      `${chalk.redBright("Account already exists")}: ${chalk.underline.yellow(
+        "delete account to create a new one"
+      )}`
+    );
     return;
   }
 
@@ -63,9 +69,13 @@ const createAccount = async () => {
     // stop the spinner
     spinner.stop();
 
-    console.log(`Account created: ${email}`);
+    console.log(
+      `${chalk.blue("Account created")}: ${chalk.underline.green(email)}`
+    );
   } catch (error) {
-    console.error(error.message);
+    // stop the spinner
+    spinner.stop();
+    console.error(`${chalk.redBright("Error")}: ${error.message}`);
   }
 };
 
