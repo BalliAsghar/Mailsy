@@ -3,8 +3,13 @@ import fs from "fs/promises";
 import copy from "./copy.js";
 import { Low, JSONFile } from "lowdb";
 import open from "open";
+import ora from "ora";
 
 const adapter = new JSONFile("account.json");
+
+// start the spinner
+const spinner = ora("creating...").start();
+
 const db = new Low(adapter);
 
 const createAccount = async () => {
@@ -54,6 +59,9 @@ const createAccount = async () => {
     db.data = data;
 
     await db.write();
+
+    // stop the spinner
+    spinner.stop();
 
     console.log(`Account created: ${email}`);
   } catch (error) {
