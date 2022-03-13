@@ -40,8 +40,8 @@ program
 // open specific email
 program
   .command("o")
-  .argument("<email>", "Email to open, e.g. '1'")
-  .description("Open specific email")
+  .argument("<email>", "Email number to open")
+  .description("Open specific email, e.g. '1'")
   .action((email) => utils.openEmail(email));
 
 // show details of the account
