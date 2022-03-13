@@ -109,11 +109,12 @@ const fetchMessages = async () => {
   spinner.stop();
 
   // if there are no emails, then there are no messages
-  emails.length === 0
-    ? console.log(`${chalk.underline.redBright("No Emails")}`)
-    : null;
-
-  return emails;
+  if (emails.length === 0) {
+    console.log(`${chalk.redBright("No Emails")}`);
+    return null;
+  } else {
+    return emails;
+  }
 };
 
 const deleteAccount = async () => {
