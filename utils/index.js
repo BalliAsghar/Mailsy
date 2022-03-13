@@ -83,14 +83,6 @@ const fetchMessages = async () => {
   // if there are no emails, then there are no messages
   emails.length === 0 ? console.log("No Emails") : null;
 
-  // display the from and subject of the emails
-  emails.forEach((email) => {
-    console.log(`
-    From: ${email.from.name} (${email.from.address})
-    Subject: ${email.subject}
-    message: ${email.intro}
-    `);
-  });
   return emails;
 };
 
@@ -175,10 +167,6 @@ const openEmail = async (email) => {
 
     // open the email html file in the browser
     await open("./email.html");
-
-    console.log("Email opened");
-
-    // delete the email html file
   } catch (error) {
     console.error(error.message);
   }

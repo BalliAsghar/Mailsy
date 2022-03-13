@@ -14,7 +14,22 @@ program
 program
   .command("m")
   .description("Fetch messages from the inbox")
-  .action(() => utils.fetchMessages());
+  .action(async () => {
+    try {
+      const emails = await utils.fetchMessages();
+
+      emails.forEach((email, i) => {
+        console.log(`
+        ID: ${i + 1}
+        From: ${email.from.name} (${email.from.address})
+        Subject: ${email.subject}
+        message: ${email.intro}
+        `);
+      });
+    } catch (error) {
+      console.error(error.message);
+    }
+  });
 
 // delete account
 program
