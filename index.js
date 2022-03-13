@@ -31,7 +31,7 @@ program
           choices: emails.map((email, index) => ({
             name: `${index + 1}. ${chalk.underline.blue(
               email.subject
-            )} - from ${email.from.address}`,
+            )} - from:  ${email.from.address}`,
             value: index + 1,
           })),
         },
