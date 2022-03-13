@@ -2,6 +2,7 @@
 import { Command } from "commander";
 import utils from "./utils/index.js";
 import inquirer from "inquirer";
+import chalk from "chalk";
 
 const program = new Command();
 
@@ -28,7 +29,9 @@ program
           name: "email",
           message: "Select an email",
           choices: emails.map((email, index) => ({
-            name: `${index + 1}. ${email.subject} - from ${email.from.address}`,
+            name: `${index + 1}. ${chalk.underline.blue(
+              email.subject
+            )} - from ${email.from.address}`,
             value: index + 1,
           })),
         },
