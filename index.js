@@ -35,7 +35,7 @@ program
       ]);
 
       // open the email
-      utils.openEmail(email);
+      await utils.openEmail(email);
     } catch (error) {
       console.error(error.message);
     }
