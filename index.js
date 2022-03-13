@@ -18,6 +18,8 @@ program
     try {
       const emails = await utils.fetchMessages();
 
+      if (!emails) return;
+
       emails.forEach((email, i) => {
         console.log(`
         ID: ${i + 1}
