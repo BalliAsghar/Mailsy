@@ -72,3 +72,11 @@ foo@bar:~$ mailsy me
 ## How Mailsy works?
 
 Mailsy is using [mail.tm](https://mail.tm/en/) API to generate a disposable email.
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
