@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { Command } from "commander";
 import utils from "./utils/index.js";
+import inquirer from "inquirer";
 
 const program = new Command();
 
@@ -20,14 +21,21 @@ program
 
       if (!emails) return;
 
-      emails.forEach((email, i) => {
-        console.log(`
-        ID: ${i + 1}
-        From: ${email.from.name} (${email.from.address})
-        Subject: ${email.subject}
-        message: ${email.intro}
-        `);
-      });
+      // show the emails using inquirer
+      const { email } = await inquirer.prompt([
+        {
+          type: "list",
+          name: "email",
+          message: "Select an email",
+          choices: emails.map((email, index) => ({
+            name: `${index + 1}. ${email.subject} - from ${email.from.address}`,
+            value: index + 1,
+          })),
+        },
+      ]);
+
+      // open the email
+      utils.openEmail(email);
     } catch (error) {
       console.error(error.message);
     }
