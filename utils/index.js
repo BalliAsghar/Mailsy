@@ -118,6 +118,9 @@ const fetchMessages = async () => {
 };
 
 const deleteAccount = async () => {
+  // start the spinner
+  const spinner = ora("deleting...").start();
+
   await db.read();
 
   const account = db.data;
@@ -125,7 +128,10 @@ const deleteAccount = async () => {
   try {
     // if the account is null, then the account has not been created yet
     if (account === null) {
-      console.log("Account not created yet");
+      // stop the spinner
+      spinner.stop();
+
+      console.log(`${chalk.redBright("Account not created yet")}`);
       return;
     }
 
@@ -138,7 +144,10 @@ const deleteAccount = async () => {
     // delete the account.json file
     await fs.unlink("./account.json");
 
-    console.log("Account deleted");
+    // stop the spinner
+    spinner.stop();
+
+    console.log(`${chalk.blue("Account deleted")}`);
   } catch (error) {
     console.error(error.message);
   }
