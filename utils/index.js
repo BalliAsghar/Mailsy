@@ -154,13 +154,19 @@ const deleteAccount = async () => {
 };
 
 const showDetails = async () => {
+  // start the spinner
+  const spinner = ora("fetching details...").start();
+
   await db.read();
 
   const account = db.data;
 
   // if the account is null then the account has not been created yet
   if (account === null) {
-    console.log("Account not created yet");
+    // stop the spinner
+    spinner.stop();
+
+    console.log(`${chalk.redBright("Account not created yet")}`);
     return;
   }
 
@@ -174,16 +180,22 @@ const showDetails = async () => {
     }
   );
 
+  // stop the spinner
+  spinner.stop();
+
   // display the account details
   console.log(`
-    Email: ${data.address}
-    createdAt: ${new Date(data.createdAt).toLocaleString()}
+    Email: ${chalk.underline.green(data.address)}
+    createdAt: ${chalk.green(new Date(data.createdAt).toLocaleString())}
   `);
 };
 
 // open specific email
 const openEmail = async (email) => {
   try {
+    // start the spinner
+    const spinner = ora("opening...").start();
+
     await db.read();
 
     const account = db.data;
@@ -207,8 +219,13 @@ const openEmail = async (email) => {
 
     // open the email html file in the browser
     await open("./email.html");
+
+    // stop the spinner
+    spinner.stop();
   } catch (error) {
-    console.error(error.message);
+    // stop the spinner
+    spinner.stop();
+    console.error(`${chalk.redBright("Error")}: ${error.message}`);
   }
 };
 
