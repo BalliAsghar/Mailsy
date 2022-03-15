@@ -1,5 +1,7 @@
 # Mailsy
 
+![GitHub Repo stars](https://img.shields.io/github/stars/BalliAsghar/Mailsy?color=ff&style=for-the-badge)
+
 ⚡️ Quickly generate a disposable email.
 
 ## Screenshots
