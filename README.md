@@ -4,6 +4,9 @@
 
 ⚡️ Quickly generate a disposable email.
 
+## Use Alfred?
+get Mailsy workflow for alfred, [here](https://github.com/BalliAsghar/mailsy-alfred)
+
 ## Screenshots
 
 ![alt text](https://raw.githubusercontent.com/BalliAsghar/Mailsy/main/screenshot/Mailsy.png)
