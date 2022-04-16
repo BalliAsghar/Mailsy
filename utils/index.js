@@ -4,8 +4,13 @@ import copy from "./copy.js";
 import { Low, JSONFile } from "lowdb";
 import ora from "ora";
 import chalk from "chalk";
+import path from "path";
+import { fileURLToPath } from "url";
+import open from "open";
 
-const adapter = new JSONFile("account.json");
+const dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const adapter = new JSONFile(dirname + "../data/account.json");
 
 const db = new Low(adapter);
 
@@ -141,7 +146,7 @@ const deleteAccount = async () => {
     });
 
     // delete the account.json file
-    await fs.unlink("./account.json");
+    await fs.unlink(dirname + "../data/account.json");
 
     // stop the spinner
     spinner.stop();
@@ -187,6 +192,48 @@ const showDetails = async () => {
     Email: ${chalk.underline.green(data.address)}
     createdAt: ${chalk.green(new Date(data.createdAt).toLocaleString())}
   `);
+};
+
+// open specific email
+const openEmail = async (email) => {
+  try {
+    // start the spinner
+    const spinner = ora("opening...").start();
+
+    await db.read();
+
+    const account = db.data;
+
+    const mails = await fetchMessages();
+
+    const mailToOpen = mails[email - 1];
+
+    // get email html content
+    const { data } = await axios.get(
+      `https://api.mail.tm/messages/${mailToOpen.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${account.token.token}`,
+        },
+      }
+    );
+
+    // write the email html content to a file
+    await fs.writeFile(dirname + "../data/email.html", data.html[0]);
+
+    console.log(dirname + "../data/email.html");
+
+    // open the email html file in the browser
+    await open(dirname + "../data/email.html");
+
+    // stop the spinner
+    spinner.stop();
+  } catch (error) {
+    // stop the spinner
+    spinner.stop();
+
+    console.error(`${chalk.redBright("Error")}: ${error.message}`);
+  }
 };
 
 // export the functions using es6 syntax
