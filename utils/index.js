@@ -190,45 +190,6 @@ const showDetails = async () => {
   `);
 };
 
-// open specific email
-const openEmail = async (email) => {
-  try {
-    // start the spinner
-    const spinner = ora("opening...").start();
-
-    await db.read();
-
-    const account = db.data;
-
-    const mails = await fetchMessages();
-
-    const mailToOpen = mails[email - 1];
-
-    // get email html content
-    const { data } = await axios.get(
-      `https://api.mail.tm/messages/${mailToOpen.id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${account.token.token}`,
-        },
-      }
-    );
-
-    // write the email html content to a file
-    await fs.writeFile("./email.html", data.html[0]);
-
-    // open the email html file in the browser
-    await open("./email.html");
-
-    // stop the spinner
-    spinner.stop();
-  } catch (error) {
-    // stop the spinner
-    spinner.stop();
-    console.error(`${chalk.redBright("Error")}: ${error.message}`);
-  }
-};
-
 // export the functions using es6 syntax
 const utils = {
   createAccount,

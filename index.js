@@ -50,13 +50,6 @@ program
   .description("Delete account")
   .action(() => utils.deleteAccount());
 
-// open specific email
-program
-  .command("o")
-  .argument("<email>", "Email number to open")
-  .description("Open specific email, e.g. '1'")
-  .action((email) => utils.openEmail(email));
-
 // show details of the account
 program
   .command("me")
