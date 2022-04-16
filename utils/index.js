@@ -2,7 +2,6 @@ import axios from "axios";
 import fs from "fs/promises";
 import copy from "./copy.js";
 import { Low, JSONFile } from "lowdb";
-import open from "open";
 import ora from "ora";
 import chalk from "chalk";
 
