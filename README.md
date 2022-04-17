@@ -34,11 +34,9 @@ random@email.com
 
 **Fetching Emails**
 
-**Note**
+**Note:**
 
-#### output structure
-
-- ID - Subject - From
+Hit Enter to open the email in your default browser.
 
 ```console
 foo@bar:~$ mailsy m
