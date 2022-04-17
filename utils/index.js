@@ -10,7 +10,7 @@ import open from "open";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const adapter = new JSONFile(dirname + "../data/account.json");
+const adapter = new JSONFile(path.join(dirname, "../data/account.json"));
 
 const db = new Low(adapter);
 
@@ -146,7 +146,7 @@ const deleteAccount = async () => {
     });
 
     // delete the account.json file
-    await fs.unlink(dirname + "../data/account.json");
+    await fs.unlink(path.join(dirname, "../data/account.json"));
 
     // stop the spinner
     spinner.stop();
@@ -219,12 +219,10 @@ const openEmail = async (email) => {
     );
 
     // write the email html content to a file
-    await fs.writeFile(dirname + "../data/email.html", data.html[0]);
-
-    console.log(dirname + "../data/email.html");
+    await fs.writeFile(path.join(dirname, "../data/email.html"), data.html[0]);
 
     // open the email html file in the browser
-    await open(dirname + "../data/email.html");
+    await open(path.join(dirname, "../data/email.html"));
 
     // stop the spinner
     spinner.stop();
