@@ -2,11 +2,15 @@ import axios from "axios";
 import fs from "fs/promises";
 import copy from "./copy.js";
 import { Low, JSONFile } from "lowdb";
-import open from "open";
 import ora from "ora";
 import chalk from "chalk";
+import path from "path";
+import { fileURLToPath } from "url";
+import open from "open";
 
-const adapter = new JSONFile("account.json");
+const dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const adapter = new JSONFile(path.join(dirname, "../data/account.json"));
 
 const db = new Low(adapter);
 
@@ -142,7 +146,7 @@ const deleteAccount = async () => {
     });
 
     // delete the account.json file
-    await fs.unlink("./account.json");
+    await fs.unlink(path.join(dirname, "../data/account.json"));
 
     // stop the spinner
     spinner.stop();
@@ -215,16 +219,17 @@ const openEmail = async (email) => {
     );
 
     // write the email html content to a file
-    await fs.writeFile("./email.html", data.html[0]);
+    await fs.writeFile(path.join(dirname, "../data/email.html"), data.html[0]);
 
     // open the email html file in the browser
-    await open("./email.html");
+    await open(path.join(dirname, "../data/email.html"));
 
     // stop the spinner
     spinner.stop();
   } catch (error) {
     // stop the spinner
     spinner.stop();
+
     console.error(`${chalk.redBright("Error")}: ${error.message}`);
   }
 };
