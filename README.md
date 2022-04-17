@@ -6,6 +6,7 @@
 ⚡️ Quickly generate a disposable email.
 
 ## Use Alfred?
+
 get Mailsy workflow for alfred, [here](https://github.com/BalliAsghar/mailsy-alfred)
 
 ## Screenshots
@@ -44,19 +45,6 @@ foo@bar:~$ mailsy m
 ? Select an email (Use arrow keys)
 ❯ 1. Hello, World! - from m.asghar99@outlook.com
   2. Mailsy - from m.asghar99@outlook.com
-
-```
-
-**Open email in browser**
-
-**Note**
-
-- this feature will be removed in the future.
-
-if you want see the full email use "o" command with ID if the email e.g 2
-
-```console
-foo@bar:~$ mailsy o 2
 
 ```
 
