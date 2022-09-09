@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - main
+      # ignore readme changes
+    paths-ignore:
+      - "README.md"
 jobs:
   build:
     runs-on: ubuntu-latest
