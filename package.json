@@ -1,6 +1,6 @@
 {
   "name": "mailsy",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "quickly generate a temporary email address",
   "exports": "./index.js",
   "type": "module",
