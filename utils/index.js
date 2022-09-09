@@ -7,6 +7,7 @@ import chalk from "chalk";
 import path from "path";
 import { fileURLToPath } from "url";
 import open from "open";
+import mailsy from "../package.json" assert { type: "json" };
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -234,6 +235,10 @@ const openEmail = async (email) => {
   }
 };
 
+const showVersion = () => {
+  console.log(`${chalk.blue("Version")}: ${chalk.green(mailsy.version)}`);
+};
+
 // export the functions using es6 syntax
 const utils = {
   createAccount,
@@ -241,6 +246,7 @@ const utils = {
   deleteAccount,
   showDetails,
   openEmail,
+  showVersion,
 };
 
 export default utils;
