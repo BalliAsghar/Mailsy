@@ -239,7 +239,7 @@ const showVersion = async () => {
     await fs.readFile(path.join(dirname, "../package.json"))
   );
 
-  console.log(`${chalk.blue("Version")}: ${chalk.green(version)}`);
+  console.log(`${chalk.greenBright(version)}`);
 };
 
 // export the functions using es6 syntax
