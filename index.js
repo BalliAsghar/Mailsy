@@ -56,10 +56,9 @@ program
   .description("Show details of the account")
   .action(() => utils.showDetails());
 
-// show mailsy version
+// show version
 program
-  .command("v")
-  .description("Show mailsy version")
+  .option("-v, --version", "output the current version")
   .action(() => utils.showVersion());
 
 program.parse();
