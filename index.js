@@ -6,6 +6,7 @@ import chalk from "chalk";
 
 const program = new Command();
 
+program.name("Mailsy").description("⚡️ Quickly generate a disposable email straight from terminal.");
 // Generate a new email
 program
   .command("g")
@@ -55,10 +56,5 @@ program
   .command("me")
   .description("Show details of the account")
   .action(() => utils.showDetails());
-
-// show version
-program
-  .option("-v, --version", "output the current version")
-  .action(() => utils.showVersion());
 
 program.parse();
