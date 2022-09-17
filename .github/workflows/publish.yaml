@@ -1,8 +1,8 @@
 name: Publish Package
 on:
   push:
-    tags:
-      - "*"
+   branches: 
+     - main
 jobs:
   npm-publish:
     runs-on: ubuntu-latest
