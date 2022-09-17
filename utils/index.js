@@ -24,11 +24,7 @@ const createAccount = async () => {
   // if account already exists, then show message and return
   if (db.data !== null) {
     spinner.stop();
-    console.log(
-      `${chalk.redBright("Account already exists")}: ${chalk.underline.yellow(
-        "delete account to create a new one"
-      )}`
-    );
+    console.log(`${chalk.redBright("Account already exists")}`);
     return;
   }
 
@@ -234,14 +230,6 @@ const openEmail = async (email) => {
   }
 };
 
-const showVersion = async () => {
-  const { version } = await JSON.parse(
-    await fs.readFile(path.join(dirname, "../package.json"))
-  );
-
-  console.log(`${chalk.greenBright(version)}`);
-};
-
 // export the functions using es6 syntax
 const utils = {
   createAccount,
@@ -249,7 +237,6 @@ const utils = {
   deleteAccount,
   showDetails,
   openEmail,
-  showVersion,
 };
 
 export default utils;
