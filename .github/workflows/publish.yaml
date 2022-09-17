@@ -4,7 +4,7 @@ on:
     tags:
       - "*"
 jobs:
-  Test:
+  npm-publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -16,7 +16,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
   Update-Homebrew:
-    needs: Test
+    needs: npm-publish
     runs-on: ubuntu-latest
     steps:
       - name: Update Homebrew formula
