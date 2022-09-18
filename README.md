@@ -5,9 +5,18 @@
 
 ⚡️ Quickly generate a disposable email.
 
-## Use Alfred?
+<!-- ## Use Alfred?
 
 get Mailsy workflow for alfred, [here](https://github.com/BalliAsghar/mailsy-alfred)
+
+## use Raycast?
+
+get Mailsy workflow for Raycast, [here](https://www.raycast.com/BalliAsghar/mailsy) -->
+
+# Extensions
+
+- [Alfred](https://github.com/BalliAsghar/mailsy-alfred)
+- [Raycast](https://www.raycast.com/BalliAsghar/mailsy)
 
 ## Screenshots
 
@@ -19,6 +28,12 @@ Use the package manager [npm](https://www.npmjs.com/) to install Mailsy.
 
 ```console
 npm install mailsy -g
+```
+
+Macos users can install mailsy via homebrew
+
+```console
+Brew install mailsy
 ```
 
 ## Usage
