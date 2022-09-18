@@ -4,13 +4,42 @@ on:
     branches:
       - main
 jobs:
-  vitest:
+  ubuntu:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [14, 16, 18]
+    name: Node ${{ matrix.node }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: "16.x"
-          registry-url: "https://registry.npmjs.org"
+          node-version: ${{ matrix.node }}
+      - run: npm install
+      - run: npm test
+  windows:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        node: [14, 16, 18]
+    name: Node ${{ matrix.node }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm install
+      - run: npm test
+  macos:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        node: [14, 16, 18]
+    name: Node ${{ matrix.node }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
       - run: npm install
       - run: npm test
