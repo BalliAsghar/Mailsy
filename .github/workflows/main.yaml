@@ -1,45 +1,20 @@
-name: Test
+name: CI
 on:
   push:
     branches:
       - main
 jobs:
-  ubuntu:
-    runs-on: ubuntu-latest
+  Testing:
     strategy:
       matrix:
-        node: [14, 16, 18]
-    name: Node ${{ matrix.node }}
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node-version: [12, 14, 16, 17, 18]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node }}
-      - run: npm install
-      - run: npm test
-  windows:
-    runs-on: windows-latest
-    strategy:
-      matrix:
-        node: [14, 16, 18]
-    name: Node ${{ matrix.node }}
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node }}
-      - run: npm install
-      - run: npm test
-  macos:
-    runs-on: macos-latest
-    strategy:
-      matrix:
-        node: [14, 16, 18]
-    name: Node ${{ matrix.node }}
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node }}
+          node-version: ${{ matrix.node-version }}
       - run: npm install
       - run: npm test
