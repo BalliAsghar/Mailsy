@@ -1,7 +1,6 @@
 # Mailsy
 
 ![GitHub Repo stars](https://img.shields.io/github/stars/BalliAsghar/Mailsy?color=ff&style=for-the-badge)
-[![Donate](https://img.shields.io/badge/Donate-PayPal-purple.svg)](https://www.paypal.me/BalliAsghar)
 
 ⚡️ Quickly generate a disposable email.
 
