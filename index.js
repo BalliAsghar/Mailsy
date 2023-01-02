@@ -6,7 +6,11 @@ import chalk from "chalk";
 
 const program = new Command();
 
-program.name("Mailsy").description("⚡️ Quickly generate a disposable email straight from terminal.");
+program
+  .name("Mailsy")
+  .description(
+    "⚡️ Quickly generate a disposable email straight from terminal."
+  );
 // Generate a new email
 program
   .command("g")
@@ -32,7 +36,7 @@ program
           choices: emails.map((email, index) => ({
             name: `${index + 1}. ${chalk.underline.blue(
               email.subject
-            )} - from:  ${email.from.address}`,
+            )} - ${chalk.yellow("From:")}  ${email.from.address}`,
             value: index + 1,
           })),
         },
