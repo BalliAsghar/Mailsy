@@ -84,7 +84,3 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
-
-## Donate
-
-If you enjoy using this app, consider [donating](http://paypal.me/BalliAsghar)!
