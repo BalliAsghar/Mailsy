@@ -3,14 +3,21 @@ import { Command } from "commander";
 import utils from "./utils/index.js";
 import inquirer from "inquirer";
 import chalk from "chalk";
+import fs from "fs";
 
 const program = new Command();
 
+const version = JSON.parse(
+  fs.readFileSync(new URL("./package.json", import.meta.url))
+).version;
+
 program
   .name("Mailsy")
+  .version(version, "-v, --version", "Output the current version")
   .description(
     "⚡️ Quickly generate a disposable email straight from terminal."
   );
+  
 // Generate a new email
 program
   .command("g")
@@ -60,5 +67,6 @@ program
   .command("me")
   .description("Show details of the account")
   .action(() => utils.showDetails());
+ 
 
 program.parse();
