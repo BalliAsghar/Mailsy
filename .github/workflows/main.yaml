@@ -45,11 +45,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       # Setup .npmrc file to publish to npm
-      - uses: mmarchini-oss/npm-otp-publish@v0
+      - uses: actions/setup-node@v3
         with:
-          npm_token: ${{ secrets.NPM_AUTH_TOKEN }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          github_actor: ${{ github.actor }}
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm ci
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
   Bump-Brew:
     needs: Release-Npm
     runs-on: ubuntu-latest
