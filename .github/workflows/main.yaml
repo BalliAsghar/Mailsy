@@ -39,22 +39,21 @@ jobs:
   #         token: ${{ secrets.GITHUB_TOKEN }}
   #         tag_name: ${{ steps.get_version.outputs.VERSION }}
   #         generate_release_notes: true
-  Release-Npm:
-    needs: Testing
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18.x'
-          registry-url: 'https://registry.npmjs.org'
-      - run: npm ci
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+  # Release-Npm:
+  #   needs: Testing
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     # Setup .npmrc file to publish to npm
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: '18.x'
+  #         registry-url: 'https://registry.npmjs.org'
+  #     - run: npm ci
+  #     - run: npm publish
+  #       env:
+  #         NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
   Bump-Brew:
-    needs: Release-Npm
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -68,6 +67,7 @@ jobs:
         run: echo ::set-output name=VERSION::$(node -p "require('./package.json').version")
       - name: Bump Brew
         uses: mislav/bump-homebrew-formula-action@v2
+        if: github.ref == 'refs/heads/main'
         with:
           formula-name: mailsy
           formula-path: Formula/mailsy.rb
