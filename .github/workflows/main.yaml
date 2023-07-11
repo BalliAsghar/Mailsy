@@ -18,3 +18,59 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install
       - run: npm test
+  Release-Github:
+    needs: Testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Get version
+        id: get_version
+        run: echo ::set-output name=VERSION::$(node -p "require('./package.json').version")
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          draft: false
+          prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: ${{ steps.get_version.outputs.VERSION }}
+          generate_release_notes: true
+  Release-Npm:
+    needs: Testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: mikeal/merge-release@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+  Bump-Brew:
+    needs: Release-Npm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Get version
+        id: get_version
+        run: echo ::set-output name=VERSION::$(node -p "require('./package.json').version")
+      - name: Bump Brew
+        uses: mislav/bump-homebrew-formula-action@v2
+        with:
+          formula-name: mailsy
+          formula-path: Formula/mailsy.rb
+          homebrew-tap: Homebrew/homebrew-core
+          base-branch: master
+          download-url: https://registry.npmjs.org/mailsy/-/mailsy-${{ steps.get_version.outputs.VERSION }}.tgz
+          commit-message: 'mailsy ${{ steps.get_version.outputs.VERSION }}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COMMITTER_TOKEN: ${{ secrets.COMMITTER_TOKEN }}
