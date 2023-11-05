@@ -71,6 +71,10 @@ foo@bar:~$ mailsy me
 
 ```
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=BalliAsghar/Mailsy&type=Date)](https://star-history.com/#BalliAsghar/Mailsy&Date)
+
 ### FAQ
 
 ## How Mailsy works?
