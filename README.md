@@ -29,6 +29,12 @@ brew install mailsy
 
 ## Usage
 
+**Capabilities**
+1. Create Disposable Email
+2. Fetch Emails
+3. Generate Account Details
+4. Delete Email Address (NO MORE EMAILS FROM SENDERS)
+
 **Creating Email**
 
 Email will be copied to clipboard!
