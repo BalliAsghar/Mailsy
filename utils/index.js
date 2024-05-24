@@ -70,7 +70,7 @@ const createAccount = async () => {
     spinner.stop();
 
     console.log(
-      `${chalk.blue("Account created")}: ${chalk.underline.green(email)}`
+      `${chalk.blue("Account created")}: ${chalk.underline.green(email)}`,
     );
   } catch (error) {
     // stop the spinner
@@ -177,7 +177,7 @@ const showDetails = async () => {
       headers: {
         Authorization: `Bearer ${account.token.token}`,
       },
-    }
+    },
   );
 
   // stop the spinner
@@ -192,17 +192,14 @@ const showDetails = async () => {
 
 // open specific email
 const openEmail = async (email) => {
+  const emailFilePath = path.join(dirname, "../data/email.html");
+  const spinner = ora("opening...").start();
+
   try {
-    // start the spinner
-    const spinner = ora("opening...").start();
-
     await db.read();
-
     const account = db.data;
-
-    const mails = await fetchMessages();
-
-    const mailToOpen = mails[email - 1];
+    const fetchedEmails = await fetchMessages();
+    const mailToOpen = fetchedEmails[email - 1];
 
     // get email html content
     const { data } = await axios.get(
@@ -211,22 +208,25 @@ const openEmail = async (email) => {
         headers: {
           Authorization: `Bearer ${account.token.token}`,
         },
-      }
+      },
     );
 
+    if (data.html === undefined) {
+      spinner.stop();
+      console.log(`${chalk.redBright("No HTML content found")}`);
+      return;
+    }
+
     // write the email html content to a file
-    await fs.writeFile(path.join(dirname, "../data/email.html"), data.html[0]);
+    await fs.writeFile(emailFilePath, data.html[0]);
 
     // open the email html file in the browser
-    await open(path.join(dirname, "../data/email.html"));
-
-    // stop the spinner
-    spinner.stop();
+    await open(emailFilePath);
   } catch (error) {
+    console.error(`${chalk.redBright("Error")}: ${error.message}`);
+  } finally {
     // stop the spinner
     spinner.stop();
-
-    console.error(`${chalk.redBright("Error")}: ${error.message}`);
   }
 };
 
